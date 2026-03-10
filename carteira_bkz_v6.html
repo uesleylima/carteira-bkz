@@ -3,265 +3,460 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carteira BKZ Private - Editor v6.0</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BKZ Carteira v6.0</title>
 <style>
+:root{--navy:#0B1120;--navy-dark:#070D18;--navy-light:#152040;--text-primary:#E8ECF4;--text-muted:#8892A8;--bkz-cyan-300:#00D4FF;--bkz-blue-600:#00A2DD;--border-blue:#1E3A5F;--border-blue-subtle:#162D4A;--gold:#C9A96E}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0a1628;color:#c8d6e5;min-height:100vh}
-.header{text-align:center;padding:30px 20px 10px}
-.header h1{font-size:28px;color:#fff;letter-spacing:2px}
-.header h1 span.pipe{color:#c8d6e5;margin:0 4px}
-.header h2{font-size:16px;color:#d4a84b;margin-top:4px;font-weight:400}
-.client-section{text-align:center;margin:15px auto;max-width:500px}
-.client-section label{font-size:11px;letter-spacing:2px;color:#7f8c9b;display:block;margin-bottom:6px}
-.client-section input{width:100%;padding:12px 16px;background:#1a2744;border:1px solid #2a3a5c;border-radius:6px;color:#fff;font-size:16px;text-align:center}
-.timestamp{text-align:center;color:#5a6a7a;font-size:12px;margin:8px 0 20px}
-.timestamp strong{color:#8a9aaa}
-.toolbar{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 20px;margin-bottom:10px}
-.toolbar button{padding:10px 22px;border:1px solid #2a4a6a;background:transparent;color:#8ac;border-radius:6px;cursor:pointer;font-size:12px;letter-spacing:1.5px;font-weight:600;transition:all .2s}
-.toolbar button:hover{background:#1a3a5a;border-color:#4a8abf}
-.toolbar button.primary{background:#0e7c7b;border-color:#0e7c7b;color:#fff}
-.toolbar button.primary:hover{background:#0a5f5e}
-.toolbar button.send{border-color:#3a4a5a;color:#5a7a8a}
-.new-client-wrap{text-align:right;padding:0 30px;margin:5px 0}
-.new-client-wrap a{color:#3a5a7a;font-size:11px;letter-spacing:1px;text-decoration:none;cursor:pointer}
-.new-client-wrap a:hover{color:#5a8abf}
-.legend{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:12px 20px;margin:5px 20px;background:#0d1e36;border-radius:8px;border:1px solid #1a2a44}
-.legend span{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;color:#7f8c9b}
-.legend span::before{content:'';width:8px;height:8px;border-radius:50%;display:inline-block}
-.legend .perf::before{background:#00e676}
-.legend .manter::before{background:#2e7d32}
-.legend .acomp::before{background:#ff9800}
-.legend .encerr::before{background:#ef5350}
-.drag-hint{text-align:center;color:#4a5a6a;font-size:11px;margin:8px 0;letter-spacing:1px}
-.tabs-container{display:flex;gap:0;padding:0 20px;margin:10px 0;border-bottom:1px solid #1a2a44;overflow-x:auto}
-.tabs-container button{padding:12px 24px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a7a8a;font-size:12px;letter-spacing:1.5px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
-.tabs-container button.active{color:#fff;border-bottom-color:#d4a84b}
-.tabs-container button:hover{color:#aab}
-.sheet{display:none;padding:10px 20px;overflow-x:auto}
-.sheet.active{display:block}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:1400px}
-thead th{background:#0d1e36;color:#8a9aaa;font-size:10px;letter-spacing:1.5px;font-weight:600;padding:12px 8px;text-align:left;border-bottom:2px solid #1a2a44;position:sticky;top:0;z-index:1}
-tbody tr{border-bottom:1px solid #111d30;transition:background .15s}
-tbody tr:hover{background:#121f35}
-tbody tr.bkz-origin{background:rgba(212,168,75,0.08)}
-tbody tr.bkz-origin:hover{background:rgba(212,168,75,0.14)}
-tbody td{padding:10px 8px;color:#c8d6e5;vertical-align:middle}
-tbody td.monetary{text-align:right;font-variant-numeric:tabular-nums}
-tbody td.center{text-align:center}
-tfoot tr{background:#0d1e36;border-top:2px solid #1a2a44}
-tfoot td{padding:12px 8px;font-weight:700;color:#fff;font-size:13px}
-tfoot td.monetary{text-align:right;font-variant-numeric:tabular-nums}
-.actions-btn{background:none;border:none;color:#5a7a8a;cursor:pointer;font-size:18px;padding:4px 8px;border-radius:4px;transition:all .15s}
-.actions-btn:hover{background:#1a2a44;color:#fff}
-.ctx-menu{position:absolute;background:#1a2744;border:1px solid #2a3a5c;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.4);z-index:100;min-width:160px;padding:4px 0;display:none}
-.ctx-menu.show{display:block}
-.ctx-menu button{display:block;width:100%;text-align:left;padding:8px 16px;background:none;border:none;color:#c8d6e5;font-size:12px;cursor:pointer;transition:background .1s}
-.ctx-menu button:hover{background:#243454}
-.ctx-menu button.danger{color:#ef5350}
-.ctx-menu button.danger:hover{background:#3a1a1a}
-@media(max-width:768px){.toolbar{gap:6px}.toolbar button{padding:8px 14px;font-size:10px}.legend{gap:12px}}
+body{background:var(--navy);color:var(--text-primary);font-family:'Inter',system-ui,sans-serif;font-size:13px}
+.container{max-width:1400px;margin:0 auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+.logo{font-size:28px;font-weight:700;letter-spacing:2px;color:var(--text-primary)}
+.logo-sub{font-size:11px;color:var(--text-muted);letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.eh{display:flex;flex-direction:column;gap:8px}
+.ig{display:flex;align-items:center;gap:12px}
+.il{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.inf{background:transparent;border:1px solid var(--border-blue);border-radius:6px;padding:6px 12px;color:var(--text-primary);font-size:14px;min-width:220px}
+.dd{font-size:12px;color:var(--text-muted)}
+.ab{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.bp,.bs{padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;border:1px solid var(--border-blue);background:var(--navy-light);color:var(--text-primary);transition:all .2s}
+.bp:hover{background:var(--bkz-blue-600);border-color:var(--bkz-blue-600)}
+.bs{background:transparent;color:var(--text-muted)}
+.bs:hover{color:var(--text-primary)}
+.nc-wrap{text-align:right;margin-bottom:12px}
+.nc-link{color:var(--bkz-cyan-300);font-size:12px;text-decoration:none}
+.nc-link:hover{text-decoration:underline}
+.dh{text-align:center;color:var(--text-muted);font-size:11px;margin-bottom:8px}
+.tabs{display:flex;gap:4px;margin-bottom:0;flex-wrap:wrap}
+.tab{padding:10px 20px;background:var(--navy-dark);border:1px solid var(--border-blue-subtle);border-bottom:none;border-radius:8px 8px 0 0;color:var(--text-muted);font-size:12px;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.tab:hover{color:var(--text-primary);background:var(--navy-light)}
+.tab.active{background:var(--navy-light);color:var(--bkz-cyan-300);border-color:var(--border-blue)}
+.tab.dragging{opacity:.5}
+.tab.drag-over{border-color:var(--bkz-cyan-300)}
+.sc{display:none;background:var(--navy-light);border:1px solid var(--border-blue);border-radius:0 8px 8px 8px;padding:16px}
+.sc.active{display:block}
+.tc{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--navy-dark);color:var(--bkz-cyan-300);padding:10px 12px;text-align:left;font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:1px;position:sticky;top:0;border-bottom:2px solid var(--border-blue)}
+td{padding:8px 12px;border-bottom:1px solid var(--border-blue-subtle);color:var(--text-primary);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover{background:rgba(0,212,255,0.03)}
+tr[data-status="destaque"]{border-left:3px solid #50DCA0}
+tr[data-status="manter"]{border-left:3px solid #5BC3DF}
+tr[data-status="acompanhar"]{border-left:3px solid #C9A96E}
+tr[data-status="encerrar"]{border-left:3px solid #ff6b6b}
+tr[data-bkz]{background:rgba(0,162,221,0.06)}
+td.ms,td.txc{color:var(--gold)}
+td.ms[contenteditable="true"]{outline:1px dashed var(--gold);border-radius:3px}
+.ca{width:40px;text-align:center;position:relative}
+.dm{position:relative;display:inline-block}
+.db{background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:4px}
+.db:hover{background:var(--navy-dark);color:var(--text-primary)}
+.dd{display:none;position:absolute;right:0;top:100%;background:var(--navy-dark);border:1px solid var(--border-blue);border-radius:8px;min-width:200px;padding:8px 0;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.dd.open{display:block}
+.dmi{display:flex;align-items:center;gap:8px;width:100%;padding:8px 16px;background:none;border:none;color:var(--text-primary);font-size:12px;cursor:pointer;text-align:left}
+.dmi:hover{background:var(--navy-light)}
+.dmi.danger{color:#ff6b6b}
+.dms{padding:8px 16px 4px;font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.dmv{height:1px;background:var(--border-blue-subtle);margin:4px 0}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.notif{position:fixed;bottom:24px;right:24px;background:var(--bkz-blue-600);color:white;padding:12px 24px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
+.notif.show{opacity:1}
+.legend{display:flex;gap:16px;justify-content:center;margin:16px 0;flex-wrap:wrap}
+.legend-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted)}
+.legend-d{width:10px;height:10px;border-radius:2px}
+.upload-zone{display:none;border:2px dashed var(--border-blue);border-radius:12px;padding:32px;text-align:center;margin-bottom:16px;transition:all .3s}
+.upload-zone.active{display:block;animation:fi .4s}
+.upload-zone.dragover{border-color:var(--bkz-cyan-300);background:rgba(0,162,221,0.08)}
+.uz-inner{max-width:600px;margin:0 auto}
+.uz-icon{font-size:48px;color:var(--bkz-cyan-300);margin-bottom:16px}
+.uz-title{font-size:16px;font-weight:400;color:var(--text-primary);margin-bottom:8px;letter-spacing:.1px}
+.uz-desc{font-size:12px;color:var(--text-muted);margin-bottom:8px;line-height:1.6}
+.uz-formats{font-size:10px;color:var(--bkz-blue-600);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.uz-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.uz-btn{padding:12px 24px!important;font-size:10px!important}
+.import-status{margin-top:20px;font-size:12px;color:var(--bkz-cyan-300)}
+.import-preview{margin-top:16px;max-height:300px;overflow:auto;border:1px solid var(--border-blue);border-radius:8px}
+.import-preview table{width:100%;font-size:11px;border-collapse:collapse}
+.import-preview th,.import-preview td{padding:4px 8px;border:1px solid var(--border-blue-subtle);text-align:left}
+.import-preview th{background:var(--navy-dark);color:var(--bkz-cyan-300);position:sticky;top:0}
+.import-preview tr:nth-child(even){background:rgba(0,28,48,0.3)}
+.import-actions{display:flex;gap:12px;justify-content:center;margin-top:16px}
+@keyframes fi{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+/* === FASE 2: AI/OCR === */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;justify-content:center;align-items:center}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--navy-dark);border:1px solid var(--border-blue);border-radius:12px;padding:32px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto}
+.modal-title{font-size:18px;font-weight:600;color:var(--bkz-cyan-300);margin-bottom:16px}
+.modal-field{margin-bottom:16px}
+.modal-field label{display:block;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.modal-field input,.modal-field select,.modal-field textarea{width:100%;background:var(--navy);border:1px solid var(--border-blue);border-radius:6px;padding:10px 12px;color:var(--text-primary);font-size:13px}
+.modal-field textarea{min-height:80px;resize:vertical;font-family:monospace}
+.modal-actions{display:flex;gap:12px;justify-content:flex-end;margin-top:20px}
+.progress-bar{width:100%;height:4px;background:var(--navy);border-radius:2px;margin:12px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--bkz-blue-600),var(--bkz-cyan-300));width:0;transition:width .5s;border-radius:2px}
+.ai-status{font-size:12px;color:var(--bkz-cyan-300);margin:8px 0}
+.ai-preview-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px}
+.ai-preview-table th{background:var(--navy);color:var(--bkz-cyan-300);padding:6px 8px;text-align:left;font-size:10px}
+.ai-preview-table td{padding:6px 8px;border-bottom:1px solid var(--border-blue-subtle);color:var(--text-primary)}
+.ai-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;background:rgba(0,162,221,0.2);color:var(--bkz-cyan-300);margin-left:8px}
+/* === FASE 3: MULTI-CLIENT === */
+.client-selector{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.client-selector select{background:var(--navy);border:1px solid var(--border-blue);border-radius:6px;padding:8px 12px;color:var(--text-primary);font-size:13px;min-width:200px}
+.client-selector .bp{padding:6px 12px;font-size:11px}
+.client-count{font-size:11px;color:var(--text-muted);margin-left:8px}
+.api-key-hint{font-size:10px;color:var(--text-muted);margin-top:4px}
+.img-preview{max-width:100%;max-height:200px;border-radius:8px;margin:12px 0;border:1px solid var(--border-blue)}
+
 </style>
 </head>
 <body>
+<div class="container">
 <div class="header">
-<h1><span>BKZ</span><span class="pipe">|</span><span>Capital</span></h1>
-<h2>BKZ Private</h2>
+<div>
+<div class="logo">BKZ <span style="color:var(--bkz-cyan-300)">|</span> Capital</div>
+<div class="logo-sub">BKZ Private</div>
 </div>
-<div class="client-section">
-<label>NOME DO CLIENTE</label>
-<input type="text" id="cn" value="" placeholder="Digite o nome do cliente" aria-label="Nome do cliente">
+<div class="eh">
+<div class="ig">
+<label class="il">Nome do Cliente</label>
+<input type="text" id="cn" class="inf" value="" placeholder="Nome do cliente">
 </div>
-<div class="timestamp">Atualizado em: <strong id="ud"></strong></div>
-<div class="toolbar">
-<button onclick="toggleEdit()" id="et">ATIVAR MODO EDI\u00C7\u00C3O</button>
-<button onclick="saveData()">SALVAR ALTERA\u00C7\u00D5ES</button>
-<button onclick="exportExcel()">EXPORTAR EXCEL</button>
-<button class="send" onclick="sendToClient()">ENVIAR PARA CLIENTE</button>
-<button class="primary" onclick="importAssets()">\u21EA IMPORTAR ATIVOS</button>
+<div class="dd">Atualizado em: <strong id="ud"></strong></div>
 </div>
-<div class="new-client-wrap" id="ncWrap"><a onclick="newClient()">+ NOVO CLIENTE</a></div>
+</div>
+<div class="client-selector">
+<label class="il">Carteira:</label>
+<select id="clientSelect" onchange="switchClient(this.value)"><option value="default">Selecione o cliente</option></select>
+<button class="bp" onclick="saveAsNewClient()">Salvar como Novo</button>
+<button class="bs" onclick="deleteCurrentClient()">Excluir</button>
+<span class="client-count" id="clientCount"></span>
+</div>
+<div class="ab">
+<button class="bp" onclick="toggleEdit()"><span id="et">Ativar Modo Edicao</span></button>
+<button class="bp" onclick="saveData()">Salvar Alteracoes</button>
+<button class="bp" onclick="exportCSV()">Exportar Excel</button>
+<button class="bs" onclick="sendEmail()">Enviar para Cliente</button>
+<button class="bp" onclick="toggleUploadZone()" style="background:rgba(0,162,221,0.15);border-color:var(--bkz-blue-600)">Importar Ativos</button>
+<button class="bp" onclick="loadFromJSON()" style="background:rgba(201,169,110,0.15);border-color:var(--gold)">Carregar JSON</button>
+</div>
+<div class="nc-wrap"><a href="#" onclick="newBlankClient();return false" class="nc-link">+ novo cliente</a></div>
+<div class="upload-zone" id="uploadZone">
+<div class="uz-inner">
+<div class="uz-icon">&#8682;</div>
+<div class="uz-title">Importar Ativos</div>
+<div class="uz-desc">Arraste uma imagem (screenshot), Excel/CSV ou JSON aqui, ou clique para selecionar</div>
+<div class="uz-formats">Formatos: PNG, JPG, XLSX, CSV, PDF, JSON</div>
+<input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.xlsx,.csv,.pdf,.json" style="display:none" onchange="handleFileUpload(this)">
+<div class="uz-btns">
+<button class="bp uz-btn" onclick="document.getElementById('fileInput').click()">Selecionar Arquivo</button>
+<button class="bs uz-btn" onclick="toggleUploadZone()">Fechar</button>
+</div>
+<div id="importStatus" class="import-status"></div>
+<div id="importPreview" class="import-preview"></div>
+<div id="importActions" class="import-actions"></div>
+</div>
+</div>
+<div class="notif" id="ntf"></div>
 <div class="legend">
-<span class="perf">PERFORMANCE DESTAQUE</span>
-<span class="manter">MANTER POSI\u00C7\u00C3O</span>
-<span class="acomp">ACOMPANHAR</span>
-<span class="encerr">PROPOSTA ENCERRAMENTO</span>
+<div class="legend-i"><div class="legend-d" style="background:#50DCA0"></div>Performance Destaque</div>
+<div class="legend-i"><div class="legend-d" style="background:#5BC3DF"></div>Manter Posicao</div>
+<div class="legend-i"><div class="legend-d" style="background:#C9A96E"></div>Acompanhar</div>
+<div class="legend-i"><div class="legend-d" style="background:#ff6b6b"></div>Proposta Encerramento</div>
 </div>
-<div class="drag-hint">\u21D4 <strong>ARRASTE AS ABAS</strong> PARA REORDENAR</div>
-<div class="tabs-container" id="tabs"></div>
-<div id="sheets"></div>
-<div class="ctx-menu" id="ctxMenu">
-<button onclick="editRow()">\u270F Editar</button>
-<button onclick="colorRow()">\uD83C\uDFA8 Colorir</button>
-<button onclick="endRow()">\u23F9 Encerrar</button>
-<button class="danger" onclick="deleteRow()">\uD83D\uDDD1 Excluir</button>
+<div class="dh">&#8700; <span>Arraste as abas</span> para reordenar</div>
+<div class="tabs" id="tabs"></div>
+<div id="sheetsContainer"></div>
+</div>
+<!-- AI MODAL -->
+<div class="modal-overlay" id="aiModal">
+<div class="modal-box">
+<div class="modal-title">Importar via IA <span class="ai-badge">OpenAI Vision</span></div>
+<div class="modal-field"><label>API Key OpenAI</label><input type="password" id="apiKey" placeholder="sk-..."><div class="api-key-hint">Sua chave nao e armazenada no servidor</div></div>
+<div class="modal-field"><label>Imagem da Carteira</label><img id="aiImgPreview" class="img-preview" style="display:none"><div id="aiFileName" class="ai-status"></div></div>
+<div class="modal-field"><label>Aba Destino</label><select id="aiTargetTab"></select></div>
+<div class="progress-bar" id="aiProgress" style="display:none"><div class="progress-fill" id="aiProgressFill"></div></div>
+<div class="ai-status" id="aiStatusText"></div>
+<div id="aiPreviewArea"></div>
+<div class="modal-actions">
+<button class="bs" onclick="closeAiModal()">Cancelar</button>
+<button class="bp" id="aiProcessBtn" onclick="processWithAI()">Processar com IA</button>
+<button class="bp" id="aiConfirmBtn" onclick="confirmAiImport()" style="display:none;background:rgba(80,220,160,0.2);border-color:#50DCA0">Confirmar Importacao</button>
+</div>
+</div>
 </div>
 <script>
-const TABS=['EMISS\u00D5ES PR\u00D3PRIAS TERCEIROS','MULTIMERCADO','A\u00C7\u00D5ES \u00C0 VISTA','FUNDOS IMOBILI\u00C1RIOS','OPERA\u00C7\u00D5ES ESTRUTURADAS'];
-const COLS=['ATIVO','EMISSOR','INDEX','TAXA','%','TAXA CONTRAT.','APLICA\u00C7\u00C3O','VENCIMENTO','QTD','GARANTIA','VALOR APLICADO','SALDO BRUTO','IR','IOF','SALDO L\u00CDQUIDO','MERCADO SEC.','A\u00C7\u00D5ES'];
-const MONEY_COLS=[10,11,12,13,14,15];
-let editMode=false,activeTab=0,ctxRow=null;
-function init(){
-document.getElementById('ud').textContent=new Date().toLocaleString('pt-BR');
-const tabsEl=document.getElementById('tabs'),sheetsEl=document.getElementById('sheets');
-TABS.forEach((name,i)=>{
-const btn=document.createElement('button');
-btn.textContent=name;
-btn.className=i===0?'active':'';
-btn.onclick=()=>switchTab(i);
-tabsEl.appendChild(btn);
-const sheet=document.createElement('div');
-sheet.className='sheet'+(i===0?' active':'');
-sheet.id='sheet-'+i;
-sheet.innerHTML=buildTable();
-sheetsEl.appendChild(sheet);
-});
-document.addEventListener('click',e=>{if(!e.target.closest('.ctx-menu')&&!e.target.closest('.actions-btn'))document.getElementById('ctxMenu').classList.remove('show');});
-}
-function buildTable(){
-let h='<table><thead><tr>';
-COLS.forEach(c=>h+='<th>'+c+'</th>');
-h+='</tr></thead><tbody></tbody>';
-h+='<tfoot><tr>';
-COLS.forEach((c,i)=>{
-if(i===0)h+='<td colspan="10" style="font-weight:700">TOTAL</td>';
-else if(i>=10&&i<=15)h+='<td class="monetary" data-total-col="'+i+'">R$ 0,00</td>';
-else if(i>0&&i<10)return;
-else if(i===16)h+='<td></td>';
-});
-h+='</tr></tfoot></table>';
-return h;
-}
-function switchTab(i){
-activeTab=i;
-document.querySelectorAll('.tabs-container button').forEach((b,j)=>b.className=j===i?'active':'');
-document.querySelectorAll('.sheet').forEach((s,j)=>s.className='sheet'+(j===i?' active':''));
-}
-function addRow(sheetIdx){
-const tbody=document.querySelector('#sheet-'+(sheetIdx!==undefined?sheetIdx:activeTab)+' tbody');
-const tr=document.createElement('tr');
-for(let i=0;i<COLS.length;i++){
-const td=document.createElement('td');
-if(MONEY_COLS.includes(i)){td.className='monetary';td.textContent='-';}
-else if(i===8){td.className='center';td.textContent='-';}
-else if(i===16){td.innerHTML='<button class="actions-btn" onclick="showCtx(event,this.parentElement.parentElement)">\u22EE</button>';}
-else{td.textContent='-';}
-tr.appendChild(td);
-}
-tbody.appendChild(tr);
-recalcTotals(sheetIdx!==undefined?sheetIdx:activeTab);
-return tr;
-}
-function showCtx(e,row){
-e.stopPropagation();
-ctxRow=row;
-const menu=document.getElementById('ctxMenu');
-menu.style.top=(e.pageY)+'px';
-menu.style.left=Math.min(e.pageX,window.innerWidth-180)+'px';
-menu.classList.add('show');
-}
-function editRow(){if(!ctxRow)return;ctxRow.querySelectorAll('td:not(:last-child)').forEach(td=>{td.contentEditable='true';td.style.outline='1px solid #2a4a6a';});hideCtx();}
-function colorRow(){
-if(!ctxRow)return;
-const colors=['','bkz-origin','perf-row','manter-row','acomp-row','encerr-row'];
-const cur=colors.findIndex(c=>ctxRow.classList.contains(c))||0;
-ctxRow.className=colors[(cur+1)%colors.length]||'';
-hideCtx();
-}
-function endRow(){if(!ctxRow)return;ctxRow.style.opacity='0.4';ctxRow.style.textDecoration='line-through';hideCtx();}
-function deleteRow(){if(!ctxRow)return;if(confirm('Excluir esta linha?')){const idx=activeTab;ctxRow.remove();recalcTotals(idx);}hideCtx();}
-function hideCtx(){document.getElementById('ctxMenu').classList.remove('show');ctxRow=null;}
-function toggleEdit(){
-editMode=!editMode;
-const btn=document.getElementById('et');
-btn.textContent=editMode?'DESATIVAR EDI\u00C7\u00C3O':'ATIVAR MODO EDI\u00C7\u00C3O';
-btn.style.borderColor=editMode?'#d4a84b':'#2a4a6a';
-btn.style.color=editMode?'#d4a84b':'#8ac';
-document.querySelectorAll('tbody td:not(:last-child)').forEach(td=>{
-td.contentEditable=editMode;if(!editMode)td.style.outline='';
-else td.style.outline='1px dashed #1a3a5a';
-});
-}
-function parseMoney(s){if(!s||s==='-')return 0;return parseFloat(s.replace(/[R$\s.]/g,'').replace(',','.'))}
-function fmtMoney(n){return'R$ '+n.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
-function recalcTotals(sheetIdx){
-const sheet=document.querySelector('#sheet-'+sheetIdx);
-if(!sheet)return;
-const rows=sheet.querySelectorAll('tbody tr');
-const sums={};
-MONEY_COLS.forEach(i=>sums[i]=0);
-rows.forEach(tr=>{
-const cells=tr.querySelectorAll('td');
-MONEY_COLS.forEach(i=>{if(cells[i])sums[i]+=parseMoney(cells[i].textContent);});
-});
-sheet.querySelectorAll('tfoot [data-total-col]').forEach(td=>{
-const col=parseInt(td.dataset.totalCol);
-td.textContent=fmtMoney(sums[col]||0);
-});
-}
-function saveData(){
-document.getElementById('ud').textContent=new Date().toLocaleString('pt-BR');
-document.querySelectorAll('tbody td').forEach(td=>{td.contentEditable='false';td.style.outline='';});
-const data={client:document.getElementById('cn').value,tabs:[]};
-TABS.forEach((_,i)=>{
-const rows=[];
-document.querySelectorAll('#sheet-'+i+' tbody tr').forEach(tr=>{
-const cells=[];tr.querySelectorAll('td:not(:last-child)').forEach(td=>cells.push(td.textContent));rows.push(cells);
-});
-data.tabs.push(rows);
-});
-localStorage.setItem('bkz_carteira_v6',JSON.stringify(data));
-alert('Altera\u00E7\u00F5es salvas!');
-recalcAllTotals();
-}
-function recalcAllTotals(){TABS.forEach((_,i)=>recalcTotals(i));}
-function loadSaved(){
-const raw=localStorage.getItem('bkz_carteira_v6');if(!raw)return;
-try{
-const data=JSON.parse(raw);
-if(data.client)document.getElementById('cn').value=data.client;
-data.tabs.forEach((rows,i)=>{
-rows.forEach(cells=>{
-const tr=addRow(i);
-cells.forEach((val,j)=>{const tds=tr.querySelectorAll('td');if(tds[j]&&j<16)tds[j].textContent=val;});
-});
-});
-recalcAllTotals();
-}catch(e){console.error('Erro ao carregar:',e);}
-}
-function exportExcel(){
-let csv='\uFEFF';
-TABS.forEach((name,i)=>{
-csv+=name+'\n';
-csv+=COLS.slice(0,-1).join(';')+'\n';
-document.querySelectorAll('#sheet-'+i+' tbody tr').forEach(tr=>{
-const cells=[];tr.querySelectorAll('td:not(:last-child)').forEach(td=>cells.push(td.textContent));csv+=cells.join(';')+'\n';
-});
-csv+='\n';
-});
-const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
-const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-a.download='carteira_bkz_'+document.getElementById('cn').value.replace(/\s/g,'_')+'_'+(new Date().toISOString().slice(0,10))+'.csv';
-a.click();
-}
-function sendToClient(){alert('Fun\u00E7\u00E3o de envio por e-mail ser\u00E1 integrada em breve.');}
-function importAssets(){
-const input=document.createElement('input');
-input.type='file';input.accept='image/*,.pdf,.xlsx,.csv';
-input.onchange=e=>{
-const file=e.target.files[0];if(!file)return;
-alert('Arquivo "'+file.name+'" selecionado.\nO processamento OCR ir\u00E1 preencher a tabela automaticamente.');
+// BKZ CARTEIRA v6.0 - DATA-DRIVEN ARCHITECTURE
+
+var TAB_SCHEMAS={acoes_vista:{id:'acoes_vista',label:'Acoes a Vista',columns:[
+{key:'ativo',label:'Ativo',type:'text',align:'left',editable:false},
+{key:'emissor',label:'Emissor',type:'text',cls:'n',editable:false},
+{key:'index',label:'Index',type:'text',cls:'n',editable:false},
+{key:'taxa',label:'Taxa',type:'text',cls:'n',editable:false},
+{key:'porcentagem',label:'Porcentagem',type:'percent',cls:'n',editable:false},
+{key:'aplicacao',label:'Aplicacao',type:'text',cls:'n',editable:false},
+{key:'vencimento',label:'Vencimento',type:'text',cls:'n',editable:false},
+{key:'quantidade',label:'Quantidade',type:'number',cls:'n',editable:false,optional:true},
+{key:'garantia',label:'Garantia',type:'text',cls:'n',editable:false,optional:true},
+{key:'valor_aplicado',label:'Valor aplicado',type:'currency',cls:'n',editable:false},
+{key:'saldo_bruto',label:'Saldo bruto',type:'currency',cls:'n',editable:false},
+{key:'ir_iof',label:'IR e IOF',type:'text',cls:'n',editable:false,optional:true},
+{key:'saldo_liquido',label:'Saldo liquido',type:'currency',cls:'n',editable:false},
+{key:'mercado_financeiro',label:'Mercado financeiro',type:'text',cls:'n',editable:true,editClass:'ms'}
+]},fundos_imobiliarios:{id:'fundos_imobiliarios',label:'Fundos Imobiliarios',columns:[
+{key:'ativo',label:'Ativo',type:'text',align:'left',editable:false},
+{key:'emissor',label:'Emissor',type:'text',cls:'n',editable:false},
+{key:'index',label:'Index',type:'text',cls:'n',editable:false},
+{key:'taxa',label:'Taxa',type:'text',cls:'n',editable:false},
+{key:'porcentagem',label:'Porcentagem',type:'percent',cls:'n',editable:false},
+{key:'aplicacao',label:'Aplicacao',type:'text',cls:'n',editable:false},
+{key:'vencimento',label:'Vencimento',type:'text',cls:'n',editable:false},
+{key:'quantidade',label:'Quantidade',type:'number',cls:'n',editable:false,optional:true},
+{key:'garantia',label:'Garantia',type:'text',cls:'n',editable:false,optional:true},
+{key:'valor_aplicado',label:'Valor aplicado',type:'currency',cls:'n',editable:false},
+{key:'saldo_bruto',label:'Saldo bruto',type:'currency',cls:'n',editable:false},
+{key:'ir_iof',label:'IR e IOF',type:'text',cls:'n',editable:false,optional:true},
+{key:'saldo_liquido',label:'Saldo liquido',type:'currency',cls:'n',editable:false},
+{key:'mercado_financeiro',label:'Mercado financeiro',type:'text',cls:'n',editable:true,editClass:'ms'}
+]},operacoes_estruturadas:{id:'operacoes_estruturadas',label:'Operacoes Estruturadas',columns:[
+{key:'ativo',label:'Ativo',type:'text',align:'left',editable:false},
+{key:'emissor',label:'Emissor',type:'text',cls:'n',editable:false},
+{key:'index',label:'Index',type:'text',cls:'n',editable:false},
+{key:'taxa',label:'Taxa',type:'text',cls:'n',editable:false},
+{key:'porcentagem',label:'Porcentagem',type:'percent',cls:'n',editable:false},
+{key:'aplicacao',label:'Aplicacao',type:'text',cls:'n',editable:false},
+{key:'vencimento',label:'Vencimento',type:'text',cls:'n',editable:false},
+{key:'quantidade',label:'Quantidade',type:'number',cls:'n',editable:false,optional:true},
+{key:'garantia',label:'Garantia',type:'text',cls:'n',editable:false,optional:true},
+{key:'valor_aplicado',label:'Valor aplicado',type:'currency',cls:'n',editable:false},
+{key:'saldo_bruto',label:'Saldo bruto',type:'currency',cls:'n',editable:false},
+{key:'ir_iof',label:'IR e IOF',type:'text',cls:'n',editable:false,optional:true},
+{key:'saldo_liquido',label:'Saldo liquido',type:'currency',cls:'n',editable:false},
+{key:'mercado_financeiro',label:'Mercado financeiro',type:'text',cls:'n',editable:true,editClass:'ms'}
+]},multimercado:{id:'multimercado',label:'Multimercado / Cambial',columns:[
+{key:'ativo',label:'Ativo',type:'text',align:'left',editable:false},
+{key:'emissor',label:'Emissor',type:'text',cls:'n',editable:false},
+{key:'index',label:'Index',type:'text',cls:'n',editable:false},
+{key:'taxa',label:'Taxa',type:'text',cls:'n',editable:false},
+{key:'porcentagem',label:'Porcentagem',type:'percent',cls:'n',editable:false},
+{key:'aplicacao',label:'Aplicacao',type:'text',cls:'n',editable:false},
+{key:'vencimento',label:'Vencimento',type:'text',cls:'n',editable:false},
+{key:'quantidade',label:'Quantidade',type:'number',cls:'n',editable:false,optional:true},
+{key:'garantia',label:'Garantia',type:'text',cls:'n',editable:false,optional:true},
+{key:'valor_aplicado',label:'Valor aplicado',type:'currency',cls:'n',editable:false},
+{key:'saldo_bruto',label:'Saldo bruto',type:'currency',cls:'n',editable:false},
+{key:'ir_iof',label:'IR e IOF',type:'text',cls:'n',editable:false,optional:true},
+{key:'saldo_liquido',label:'Saldo liquido',type:'currency',cls:'n',editable:false},
+{key:'mercado_financeiro',label:'Mercado financeiro',type:'text',cls:'n',editable:true,editClass:'ms'}
+]},emissoes_terceiros:{id:'emissoes_terceiros',label:'Emissoes Terceiros / RF',columns:[
+{key:'ativo',label:'Ativo',type:'text',align:'left',editable:false},
+{key:'emissor',label:'Emissor',type:'text',cls:'n',editable:false},
+{key:'index',label:'Index',type:'text',cls:'n',editable:false},
+{key:'taxa',label:'Taxa',type:'text',cls:'n',editable:false},
+{key:'porcentagem',label:'Porcentagem',type:'percent',cls:'n',editable:false},
+{key:'aplicacao',label:'Aplicacao',type:'text',cls:'n',editable:false},
+{key:'vencimento',label:'Vencimento',type:'text',cls:'n',editable:false},
+{key:'quantidade',label:'Quantidade',type:'number',cls:'n',editable:false,optional:true},
+{key:'garantia',label:'Garantia',type:'text',cls:'n',editable:false,optional:true},
+{key:'valor_aplicado',label:'Valor aplicado',type:'currency',cls:'n',editable:false},
+{key:'saldo_bruto',label:'Saldo bruto',type:'currency',cls:'n',editable:false},
+{key:'ir_iof',label:'IR e IOF',type:'text',cls:'n',editable:false,optional:true},
+{key:'saldo_liquido',label:'Saldo liquido',type:'currency',cls:'n',editable:false},
+{key:'mercado_financeiro',label:'Mercado financeiro',type:'text',cls:'n',editable:true,editClass:'ms'}
+]}};
+
+var CLIENT_DATA = {
+tabs: {
+acoes_vista: [
+    {ativo:'PETR4',quantidade:'500',valor_aplicado:'R$28,50',saldo_bruto:'R$36,20',saldo_liquido:'R$18.100',porcentagem:'8,2%',ir_iof:'+27,0%',taxa_contratada:'-',mercado_sec:'-'},
+    {ativo:'VALE3',quantidade:'300',valor_aplicado:'R$68,40',saldo_bruto:'R$61,50',saldo_liquido:'R$18.450',porcentagem:'8,4%',ir_iof:'-10,1%',taxa_contratada:'-',mercado_sec:'-'},
+    {ativo:'ITUB4',quantidade:'400',valor_aplicado:'R$26,80',saldo_bruto:'R$32,10',saldo_liquido:'R$12.840',porcentagem:'5,8%',ir_iof:'+19,8%',taxa_contratada:'-',mercado_sec:'-'},
+    {ativo:'BBAS3',quantidade:'200',valor_aplicado:'R$42,60',saldo_bruto:'R$54,30',saldo_liquido:'R$10.860',porcentagem:'4,9%',ir_iof:'+27,5%',taxa_contratada:'-',mercado_sec:'-'},
+    {ativo:'WEGE3',quantidade:'150',valor_aplicado:'R$35,20',saldo_bruto:'R$40,80',saldo_liquido:'R$6.120',porcentagem:'2,8%',ir_iof:'+15,9%',taxa_contratada:'-',mercado_sec:'-'}
+],
+fundos_imobiliarios: [
+    {ativo:'HGLG11',quantidade:'100',valor_aplicado:'R$162,40',saldo_bruto:'R$158,90',dy:'8,2%',saldo_liquido:'R$15.890',porcentagem:'7,2%',ir_iof:'-2,2%',taxa_contratada:'-',mercado_sec:'-'},
+    {ativo:'XPML11',quantidade:'80',valor_aplicado:'R$98,50',saldo_bruto:'R$104,30',dy:'9,1%',saldo_liquido:'R$8.344',porcentagem:'3,8%',ir_iof:'+5,9%',taxa_contratada:'-',mercado_sec:'-'},
+    {ativo:'KNRI11',quantidade:'60',valor_aplicado:'R$138,70',saldo_bruto:'R$142,50',dy:'7,5%',saldo_liquido:'R$8.550',porcentagem:'3,9%',ir_iof:'+2,7%',taxa_contratada:'-',mercado_sec:'-'}
+],
+operacoes_estruturadas: [
+    {ativo:'COE Ibovespa',tipo:'COE',vencimento:'15/03/2025',saldo_liquido:'R$25.000',porcentagem:'11,3%',ir_iof:'+12,5%',taxa_contratada:'110% CDI',mercado_sec:'-'},
+    {ativo:'Collar PETR4',tipo:'Opcao',vencimento:'20/06/2025',saldo_liquido:'R$8.000',porcentagem:'3,6%',ir_iof:'+5,2%',taxa_contratada:'-',mercado_sec:'-'}
+],
+multimercado: [
+    {fundo:'Verde FIM',tipo:'Multi Macro',saldo_liquido:'R$30.000',porcentagem:'13,6%',rent_mes:'+1,2%',rent_ano:'+8,4%',taxa_contratada:'2/20',mercado_sec:'-'},
+    {fundo:'SPX Nimitz',tipo:'Multi Macro',saldo_liquido:'R$20.000',porcentagem:'9,1%',rent_mes:'+0,8%',rent_ano:'+6,1%',taxa_contratada:'2/20',mercado_sec:'-'}
+],
+emissoes_terceiros: [
+    {emissor:'Banco Inter',tipo:'CDB',vencimento:'01/12/2025',saldo_liquido:'R$15.000',porcentagem:'6,8%',taxa_contratada:'120% CDI',mercado_sec:'-'},
+    {emissor:'Klabin',tipo:'Debenture',vencimento:'15/08/2026',saldo_liquido:'R$12.000',porcentagem:'5,4%',taxa_contratada:'CDI+1,8%',mercado_sec:'-'}
+]
+},
+rowStatuses:{},rowBkz:{}
 };
-input.click();
+
+// === GLOBAL STATE ===
+var activeSheetId=null,editMode=false,defaultOrder=[],tabOrder=[],draggedTab=null;
+
+// === UTILITY ===
+function notify(msg){var el=document.getElementById('ntf');if(!el)return;el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show')},3000)}
+function updateDate(){var el=document.getElementById('ud');if(el) el.textContent=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})}
+
+// === MENU 3 PONTOS ===
+function buildMenuHTML(){return '<div class="dms">Classificar</div><button class="dmi" data-action="destaque"><div class="dot" style="background:#50DCA0"></div>Perfil de Destaque</button><button class="dmi" data-action="manter"><div class="dot" style="background:#5BC3DF"></div>Manter</button><button class="dmi" data-action="acompanhar"><div class="dot" style="background:#C9A96E"></div>Acompanhar</button><button class="dmi" data-action="encerrar"><div class="dot" style="background:#ff6b6b"></div>Propor Encerramento</button><button class="dmi" data-action="limpar"><div class="dot" style="background:rgba(255,255,255,0.5)"></div>Limpar</button><div class="dmv"></div><div class="dms">Origem</div><button class="dmi" data-action="bkz"><div class="dot" style="background:#00A2DD"></div>BKZ Kapital</button><button class="dmi" data-action="bkz-limpar"><div class="dot" style="background:rgba(255,255,255,0.5)"></div>Limpar Origem</button><div class="dmv"></div><div class="dms">Gerenciar</div><button class="dmi" data-action="add-above">Adicionar Linha Acima</button><button class="dmi" data-action="add-below">Adicionar Linha Abaixo</button><button class="dmi" data-action="duplicate">Duplicar Linha</button><div class="dmv"></div><button class="dmi danger" data-action="delete">Excluir Linha</button>'}
+
+function attachMenu(tr){var atd=tr.querySelector('td.ca');if(!atd)return;atd.innerHTML='<div class="dm"><button class="db" onclick="toggleMenu(this)">&#8942;</button><div class="dd">'+buildMenuHTML()+'</div></div>';var items=atd.querySelectorAll('.dmi');for(var i=0;i<items.length;i++){(function(btn){btn.onclick=function(e){e.stopPropagation();doAction(btn.getAttribute('data-action'),tr);closeMenus()}})(items[i])}}
+function toggleMenu(btn){var dd=btn.nextElementSibling;var w=dd.classList.contains('open');closeMenus();if(!w)dd.classList.add('open')}
+function closeMenus(){var o=document.querySelectorAll('.dd.open');for(var i=0;i<o.length;i++)o[i].classList.remove('open')}
+document.addEventListener('click',closeMenus);
+
+function doAction(a,row){
+if(a==='destaque')row.setAttribute('data-status','destaque');
+else if(a==='manter')row.setAttribute('data-status','manter');
+else if(a==='acompanhar')row.setAttribute('data-status','acompanhar');
+else if(a==='encerrar')row.setAttribute('data-status','encerrar');
+else if(a==='limpar')row.removeAttribute('data-status');
+else if(a==='bkz')row.setAttribute('data-bkz','true');
+else if(a==='bkz-limpar')row.removeAttribute('data-bkz');
+else if(a==='add-above'){var nr=makeEmptyRow(row);row.parentNode.insertBefore(nr,row)}
+else if(a==='add-below'){var nr=makeEmptyRow(row);row.parentNode.insertBefore(nr,row.nextSibling)}
+else if(a==='duplicate'){var cl=row.cloneNode(true);attachMenu(cl);row.parentNode.insertBefore(cl,row.nextSibling)}
+else if(a==='delete'){if(confirm('Excluir esta linha?'))row.parentNode.removeChild(row)}
 }
-function newClient(){
-if(confirm('Criar novo cliente? Dados n\u00E3o salvos ser\u00E3o perdidos.')){
-document.getElementById('cn').value='';
-document.querySelectorAll('tbody').forEach(tb=>tb.innerHTML='');
-recalcAllTotals();
-}
-}
-window.onload=()=>{init();loadSaved();};
+
+function makeEmptyRow(ref){var cols=ref.querySelectorAll('td').length;var tr=document.createElement('tr');for(var i=0;i<cols-1;i++){var td=document.createElement('td');if(i>0)td.className='n';td.contentEditable='true';td.textContent='-';tr.appendChild(td)}var atd=document.createElement('td');atd.className='ca';tr.appendChild(atd);attachMenu(tr);return tr}
+
+// === RENDERING ENGINE ===
+function buildAllSheets(){
+var container=document.getElementById('sheetsContainer');
+container.innerHTML='';defaultOrder=[];tabOrder=[];
+var tabKeys=Object.keys(CLIENT_DATA.tabs);
+for(var t=0;t<tabKeys.length;t++){
+    var key=tabKeys[t],schema=TAB_SCHEMAS[key];
+    if(!schema)continue;
+    var sheetId='sheet-'+t;
+    defaultOrder.push(sheetId);tabOrder.push(sheetId);
+    var div=document.createElement('div');div.className='sc';div.id=sheetId;
+    div.setAttribute('data-tab-name',schema.label);
+    var tc=document.createElement('div');tc.className='tc';
+    var table=document.createElement('table');
+    var thead=document.createElement('thead');
+    var htr=document.createElement('tr');
+    for(var c=0;c<schema.columns.length;c++){
+        var th=document.createElement('th');th.textContent=schema.columns[c].label;
+        if(schema.columns[c].cls)th.className=schema.columns[c].cls;
+        htr.appendChild(th);
+    }
+    var thA=document.createElement('th');thA.className='ca';thA.textContent='';
+    htr.appendChild(thA);thead.appendChild(htr);table.appendChild(thead);
+    var tbody=document.createElement('tbody');
+    var rows=CLIENT_DATA.tabs[key];
+    for(var r=0;r<rows.length;r++){
+        var tr=document.createElement('tr'),rowData=rows[r];
+        if(CLIENT_DATA.rowStatuses[sheetId]&&CLIENT_DATA.rowStatuses[sheetId][r])tr.setAttribute('data-status',CLIENT_DATA.rowStatuses[sheetId][r]);
+        if(CLIENT_DATA.rowBkz[sheetId]&&CLIENT_DATA.rowBkz[sheetId][r])tr.setAttribute('data-bkz','true');
+        for(var c=0;c<schema.columns.length;c++){
+            var col=schema.columns[c],td=document.createElement('td');
+            td.textContent=rowData[col.key]||'-';
+            if(col.cls)td.className=col.cls;
+            if(col.editable&&col.editClass)td.className=(td.className?td.className+' ':'')+col.editClass;
+            tr.appendChild(td);
+        }
+        var atd=document.createElement('td');atd.className='ca';tr.appendChild(atd);
+        attachMenu(tr);tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);tc.appendChild(table);div.appendChild(tc);container.appendChild(div);
+}}
+
+// === TABS ===
+function renderTabs(){var c=document.getElementById('tabs');c.innerHTML='';for(var i=0;i<tabOrder.length;i++){var id=tabOrder[i],sh=document.getElementById(id);if(!sh)continue;var b=document.createElement('button');b.className='tab';b.textContent=sh.getAttribute('data-tab-name');b.setAttribute('data-sheet-id',id);b.draggable=true;(function(sid,btn){btn.onclick=function(){showSheet(sid)};btn.ondragstart=function(e){draggedTab=btn;btn.classList.add('dragging');e.dataTransfer.effectAllowed='move'};btn.ondragover=function(e){e.preventDefault()};btn.ondragenter=function(e){e.preventDefault();if(btn!==draggedTab)btn.classList.add('drag-over')};btn.ondragleave=function(){btn.classList.remove('drag-over')};btn.ondrop=function(e){e.preventDefault();btn.classList.remove('drag-over');if(!draggedTab||btn===draggedTab)return;var from=tabOrder.indexOf(draggedTab.getAttribute('data-sheet-id'));var to=tabOrder.indexOf(sid);tabOrder.splice(from,1);tabOrder.splice(to,0,draggedTab.getAttribute('data-sheet-id'));try{localStorage.setItem('bkz_tab_order',JSON.stringify(tabOrder))}catch(x){}renderTabs();notify('Ordem das abas atualizada')};btn.ondragend=function(){var all=document.querySelectorAll('.tab');for(var j=0;j<all.length;j++){all[j].classList.remove('dragging','drag-over')}draggedTab=null}})(id,b);c.appendChild(b)}}
+
+function showSheet(id){activeSheetId=id;var sheets=document.querySelectorAll('.sc');for(var i=0;i<sheets.length;i++)sheets[i].classList.remove('active');var s=document.getElementById(id);if(s)s.classList.add('active');var tabs=document.querySelectorAll('.tab');for(var i=0;i<tabs.length;i++){tabs[i].classList.toggle('active',tabs[i].getAttribute('data-sheet-id')===id)}}
+
+// === PERSISTENCE ===
+function saveData(){var data={rowStatuses:{},rowBkz:{},msValues:{},txcValues:{},clientName:'',tabOrder:tabOrder};var cn=document.getElementById('cn');if(cn)data.clientName=cn.value;var sheets=document.querySelectorAll('.sc');for(var s=0;s<sheets.length;s++){var sid=sheets[s].id,rows=sheets[s].querySelectorAll('tbody tr');data.rowStatuses[sid]={};data.rowBkz[sid]={};data.msValues[sid]={};data.txcValues[sid]={};for(var r=0;r<rows.length;r++){var st=rows[r].getAttribute('data-status');if(st)data.rowStatuses[sid][r]=st;if(rows[r].getAttribute('data-bkz'))data.rowBkz[sid][r]=true;var ms=rows[r].querySelector('td.ms');if(ms&&ms.textContent!=='-')data.msValues[sid][r]=ms.textContent;var txc=rows[r].querySelector('td.txc');if(txc&&txc.textContent!=='-')data.txcValues[sid][r]=txc.textContent}}try{localStorage.setItem('bkz_save',JSON.stringify(data))}catch(x){}notify('Dados salvos com sucesso')}
+
+function restoreData(){try{var raw=localStorage.getItem('bkz_save');if(!raw)return;var data=JSON.parse(raw);if(data.clientName){var cn=document.getElementById('cn');if(cn)cn.value=data.clientName}if(data.tabOrder&&data.tabOrder.length)tabOrder=data.tabOrder;var sheets=document.querySelectorAll('.sc');for(var s=0;s<sheets.length;s++){var sid=sheets[s].id,rows=sheets[s].querySelectorAll('tbody tr');for(var r=0;r<rows.length;r++){if(data.rowStatuses[sid]&&data.rowStatuses[sid][r])rows[r].setAttribute('data-status',data.rowStatuses[sid][r]);if(data.rowBkz[sid]&&data.rowBkz[sid][r])rows[r].setAttribute('data-bkz','true');if(data.msValues[sid]&&data.msValues[sid][r]){var ms=rows[r].querySelector('td.ms');if(ms)ms.textContent=data.msValues[sid][r]}if(data.txcValues[sid]&&data.txcValues[sid][r]){var txc=rows[r].querySelector('td.txc');if(txc)txc.textContent=data.txcValues[sid][r]}}}}catch(x){}}
+
+// === EDIT MODE ===
+function toggleEdit(){editMode=!editMode;var cells=document.querySelectorAll('td.ms,td.txc');for(var i=0;i<cells.length;i++)cells[i].contentEditable=editMode?'true':'false';var btn=document.getElementById('et');if(btn)btn.textContent=editMode?'Salvar Edicoes':'Ativar Modo Edicao';if(!editMode)saveData()}
+
+// === EXPORT ===
+function exportCSV(){if(!activeSheetId)return;var sh=document.getElementById(activeSheetId);if(!sh)return;var rows=sh.querySelectorAll('tr');var csv='';for(var i=0;i<rows.length;i++){var cells=rows[i].querySelectorAll('th,td');var line=[];for(var j=0;j<cells.length-1;j++)line.push('"'+cells[j].textContent.replace(/"/g,'""')+'"');csv+=line.join(',')+('\n')}var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(sh.getAttribute('data-tab-name')||'carteira')+'.csv';a.click();notify('CSV exportado')}
+
+function sendEmail(){var cn=document.getElementById('cn');var name=cn?cn.value:'Cliente';window.open('mailto:?subject=Carteira%20'+encodeURIComponent(name)+'&body=Segue%20carteira%20em%20anexo.')}
+
+// === UPLOAD ZONE ===
+function toggleUploadZone(){var uz=document.getElementById('uploadZone');uz.classList.toggle('active')}
+function handleFileUpload(input){if(!input.files||!input.files[0])return;var file=input.files[0];var st=document.getElementById('importStatus');var ext=file.name.split('.').pop().toLowerCase();if(['png','jpg','jpeg','webp'].indexOf(ext)>=0){st.textContent='Imagem detectada. Abrindo assistente IA...';toggleUploadZone();openAiModal(file)}else if(ext==='json'){var reader=new FileReader();reader.onload=function(e){try{importJSON(e.target.result);st.textContent='JSON importado!'}catch(err){st.textContent='Erro: '+err.message}};reader.readAsText(file)}else{st.textContent='Formato .'+ext+' detectado. Use JSON para importacao direta ou imagem para IA.'}}
+
+function loadFromJSON(){var json=prompt('Cole o JSON da carteira aqui:');if(json)importJSON(json)}
+
+function newBlankClient(){if(!confirm('Criar novo cliente em branco? Dados nao salvos serao perdidos.'))return;document.getElementById('cn').value='';for(var k in CLIENT_DATA.tabs)CLIENT_DATA.tabs[k]=[];CLIENT_DATA.rowStatuses={};CLIENT_DATA.rowBkz={};buildAllSheets();restoreData();renderTabs();if(tabOrder.length)showSheet(tabOrder[0]);notify('Novo cliente criado')}
+
+function importJSON(jsonData){try{var d=(typeof jsonData==='string')?JSON.parse(jsonData):jsonData;if(d.tabs)CLIENT_DATA.tabs=d.tabs;if(d.rowStatuses)CLIENT_DATA.rowStatuses=d.rowStatuses;if(d.rowBkz)CLIENT_DATA.rowBkz=d.rowBkz;buildAllSheets();restoreData();renderTabs();showSheet(tabOrder[0]);notify('Dados importados com sucesso')}catch(e){notify('Erro ao importar: '+e.message)}}
+
+
+// === FASE 2: AI/OCR INTEGRATION ===
+var aiPendingData=null,aiCurrentFile=null;
+
+function openAiModal(file){aiCurrentFile=file;document.getElementById('aiModal').classList.add('active');var sel=document.getElementById('aiTargetTab');sel.innerHTML='';var keys=Object.keys(TAB_SCHEMAS);for(var i=0;i<keys.length;i++){var o=document.createElement('option');o.value=keys[i];o.textContent=TAB_SCHEMAS[keys[i]].label;sel.appendChild(o)}if(file){document.getElementById('aiFileName').textContent='Arquivo: '+file.name;var reader=new FileReader();reader.onload=function(e){var img=document.getElementById('aiImgPreview');img.src=e.target.result;img.style.display='block'};reader.readAsDataURL(file)}var savedKey=localStorage.getItem('bkz_openai_key');if(savedKey)document.getElementById('apiKey').value=savedKey}
+
+function closeAiModal(){document.getElementById('aiModal').classList.remove('active');aiPendingData=null;aiCurrentFile=null;document.getElementById('aiImgPreview').style.display='none';document.getElementById('aiPreviewArea').innerHTML='';document.getElementById('aiStatusText').textContent='';document.getElementById('aiProgress').style.display='none';document.getElementById('aiConfirmBtn').style.display='none';document.getElementById('aiProcessBtn').style.display='inline-block'}
+
+function processWithAI(){
+var apiKey=document.getElementById('apiKey').value.trim();
+if(!apiKey){notify('Insira a API Key da OpenAI');return}
+localStorage.setItem('bkz_openai_key',apiKey);
+var targetTab=document.getElementById('aiTargetTab').value;
+var schema=TAB_SCHEMAS[targetTab];
+if(!schema){notify('Selecione uma aba destino');return}
+if(!aiCurrentFile){notify('Nenhum arquivo selecionado');return}
+var progress=document.getElementById('aiProgress');var fill=document.getElementById('aiProgressFill');var status=document.getElementById('aiStatusText');
+progress.style.display='block';fill.style.width='20%';status.textContent='Lendo imagem...';
+document.getElementById('aiProcessBtn').disabled=true;
+var reader=new FileReader();
+reader.onload=function(e){
+var base64=e.target.result.split(',')[1];
+fill.style.width='40%';status.textContent='Enviando para OpenAI Vision...';
+var colNames=schema.columns.map(function(c){return c.key}).join(', ');
+var prompt='Analise esta imagem de uma carteira de investimentos. Extraia os dados da tabela e retorne APENAS um JSON valido (sem markdown) no formato: {"rows":[{'+colNames.split(', ').map(function(c){return '"'+c+'":"valor"'}).join(',')+'}]}. Use "-" para campos vazios. Mantenha os valores exatamente como aparecem na imagem. Responda SOMENTE com o JSON.';
+fetch('https://api.openai.com/v1/chat/completions',{
+method:'POST',
+headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey},
+body:JSON.stringify({model:'gpt-4o',messages:[{role:'user',content:[{type:'text',text:prompt},{type:'image_url',image_url:{url:'data:image/'+aiCurrentFile.type.split('/')[1]+';base64,'+base64,detail:'high'}}]}],max_tokens:4096,temperature:0})
+}).then(function(r){if(!r.ok)return r.text().then(function(t){var m='API Error '+r.status;try{var e=JSON.parse(t);if(e.error&&e.error.message)m+=': '+e.error.message}catch(x){m+=': '+t.substring(0,200)}throw new Error(m)});return r.json()}).then(function(data){
+fill.style.width='80%';status.textContent='Processando resposta...';
+var content=data.choices[0].message.content.trim();
+if(content.startsWith('```'))content=content.replace(/```json?\n?/g,'').replace(/```/g,'').trim();
+try{var parsed=JSON.parse(content);aiPendingData={tab:targetTab,rows:parsed.rows||parsed};showAiPreview(aiPendingData,schema);fill.style.width='100%';status.textContent='Dados extraidos! Revise e confirme.';document.getElementById('aiConfirmBtn').style.display='inline-block';document.getElementById('aiProcessBtn').style.display='none'}catch(pe){status.textContent='Erro ao parsear resposta: '+pe.message;fill.style.width='0'}
+}).catch(function(err){status.textContent='Erro: '+err.message;console.error('BKZ AI Error:',err);fill.style.width='0'}).finally(function(){document.getElementById('aiProcessBtn').disabled=false})
+};reader.readAsDataURL(aiCurrentFile)}
+
+function showAiPreview(data,schema){var area=document.getElementById('aiPreviewArea');var html='<table class="ai-preview-table"><thead><tr>';for(var i=0;i<schema.columns.length;i++)html+='<th>'+schema.columns[i].label+'</th>';html+='</tr></thead><tbody>';for(var r=0;r<data.rows.length;r++){html+='<tr>';for(var c=0;c<schema.columns.length;c++){var val=data.rows[r][schema.columns[c].key]||'-';html+='<td>'+val+'</td>'}html+='</tr>'}html+='</tbody></table>';area.innerHTML=html}
+
+function confirmAiImport(){if(!aiPendingData)return;var tab=aiPendingData.tab;if(!CLIENT_DATA.tabs[tab])CLIENT_DATA.tabs[tab]=[];for(var i=0;i<aiPendingData.rows.length;i++){CLIENT_DATA.tabs[tab].push(aiPendingData.rows[i])}buildAllSheets();restoreData();renderTabs();var keys=Object.keys(CLIENT_DATA.tabs);for(var t=0;t<keys.length;t++){if(keys[t]===tab){showSheet('sheet-'+t);break}}closeAiModal();notify(aiPendingData.rows.length+' linhas importadas via IA')}
+
+// === FASE 3: MULTI-CLIENT ===
+var currentClientId='default';
+
+function getClientList(){try{return JSON.parse(localStorage.getItem('bkz_clients')||'[]')}catch(e){return[]}}
+function saveClientList(list){try{localStorage.setItem('bkz_clients',JSON.stringify(list))}catch(e){}}
+
+function saveAsNewClient(){var name=document.getElementById('cn').value.trim();if(!name){notify('Preencha o nome do cliente');return}var id='client_'+Date.now();var clientData={id:id,name:name,tabs:JSON.parse(JSON.stringify(CLIENT_DATA.tabs)),rowStatuses:{},rowBkz:{}};var sheets=document.querySelectorAll('.sc');for(var s=0;s<sheets.length;s++){var sid=sheets[s].id,rows=sheets[s].querySelectorAll('tbody tr');clientData.rowStatuses[sid]={};clientData.rowBkz[sid]={};for(var r=0;r<rows.length;r++){var st=rows[r].getAttribute('data-status');if(st)clientData.rowStatuses[sid][r]=st;if(rows[r].getAttribute('data-bkz'))clientData.rowBkz[sid][r]=true}}try{localStorage.setItem('bkz_client_'+id,JSON.stringify(clientData))}catch(e){}var list=getClientList();list.push({id:id,name:name});saveClientList(list);currentClientId=id;refreshClientSelector();notify('Cliente "'+name+'" salvo')}
+
+function switchClient(id){if(id==='default'){currentClientId='default';document.getElementById('cn').value='';for(var k in CLIENT_DATA.tabs)CLIENT_DATA.tabs[k]=[];CLIENT_DATA.rowStatuses={};CLIENT_DATA.rowBkz={};buildAllSheets();renderTabs();if(tabOrder.length)showSheet(tabOrder[0]);return}try{var raw=localStorage.getItem('bkz_client_'+id);if(!raw){notify('Cliente nao encontrado');return}var data=JSON.parse(raw);currentClientId=id;document.getElementById('cn').value=data.name||'';CLIENT_DATA.tabs=data.tabs;CLIENT_DATA.rowStatuses=data.rowStatuses||{};CLIENT_DATA.rowBkz=data.rowBkz||{};buildAllSheets();restoreClientStatuses(data);renderTabs();if(tabOrder.length)showSheet(tabOrder[0]);notify('Carteira de "'+data.name+'" carregada')}catch(e){notify('Erro ao carregar: '+e.message)}}
+
+function restoreClientStatuses(data){var sheets=document.querySelectorAll('.sc');for(var s=0;s<sheets.length;s++){var sid=sheets[s].id,rows=sheets[s].querySelectorAll('tbody tr');for(var r=0;r<rows.length;r++){if(data.rowStatuses[sid]&&data.rowStatuses[sid][r])rows[r].setAttribute('data-status',data.rowStatuses[sid][r]);if(data.rowBkz[sid]&&data.rowBkz[sid][r])rows[r].setAttribute('data-bkz','true')}}}
+
+function deleteCurrentClient(){if(currentClientId==='default'){notify('Nenhum cliente selecionado');return}if(!confirm('Excluir este cliente?'))return;var list=getClientList();list=list.filter(function(c){return c.id!==currentClientId});saveClientList(list);try{localStorage.removeItem('bkz_client_'+currentClientId)}catch(e){}currentClientId='default';refreshClientSelector();switchClient('default');notify('Cliente excluido')}
+
+function refreshClientSelector(){var sel=document.getElementById('clientSelect');sel.innerHTML='<option value="default">-- Selecione --</option>';var list=getClientList();for(var i=0;i<list.length;i++){var o=document.createElement('option');o.value=list[i].id;o.textContent=list[i].name;if(list[i].id===currentClientId)o.selected=true;sel.appendChild(o)}document.getElementById('clientCount').textContent=list.length+' cliente(s) salvos'}
+
+// === INIT ===
+updateDate();buildAllSheets();restoreData();renderTabs();if(tabOrder.length)showSheet(tabOrder[0]);refreshClientSelector();
+// Fase 4: Drag-drop on upload zone
+var uz=document.getElementById('uploadZone');if(uz){uz.addEventListener('dragover',function(e){e.preventDefault();uz.classList.add('dragover')});uz.addEventListener('dragleave',function(){uz.classList.remove('dragover')});uz.addEventListener('drop',function(e){e.preventDefault();uz.classList.remove('dragover');if(e.dataTransfer.files&&e.dataTransfer.files[0]){var fi=document.getElementById('fileInput');fi.files=e.dataTransfer.files;handleFileUpload(fi)}})}
 </script>
 </body>
 </html>
